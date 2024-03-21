@@ -1,0 +1,27 @@
+id,name
+0,background
+1,vegetables | leafy_greens
+2,vegetables | stem_vegetables
+3,vegetables | non-starchy_roots
+4,vegetables | other
+5,fruits
+6,protein | meat
+7,protein | poultry
+8,protein | seafood
+9,protein | eggs
+10,protein | beans/nuts
+11,starches/grains | baked_goods
+12,starches/grains | rice/grains/cereals
+13,starches/grains | noodles/pasta
+14,starches/grains | starchy_vegetables
+15,starches/grains | other
+16,soups/stews
+17,herbs/spices
+18,dairy
+19,snacks
+20,sweets/desserts
+21,beverages
+22,fats/oils/sauces
+23,food_containers
+24,dining_tools
+25,other_food
