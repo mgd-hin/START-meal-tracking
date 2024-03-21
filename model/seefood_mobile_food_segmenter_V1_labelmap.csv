@@ -1,0 +1,27 @@
+id,name,serving_size_g,examples
+0,background,0
+1,vegetables | leafy_greens,75
+2,vegetables | stem_vegetables,85
+3,vegetables | non-starchy_roots,70
+4,vegetables | other,85
+5,fruits,150
+6,protein | meat,100
+7,protein | poultry,100
+8,protein | seafood,100
+9,protein | eggs,50
+10,protein | beans/nuts,30
+11,starches/grains | baked_goods,75
+12,starches/grains | rice/grains/cereals,100
+13,starches/grains | noodles/pasta,100
+14,starches/grains | starchy_vegetables,150
+15,starches/grains | other,50
+16,soups/stews,150
+17,herbs/spices,10
+18,dairy,200
+19,snacks,60
+20,sweets/desserts,100
+21,beverages,330
+22,fats/oils/sauces,1
+23,food_containers,0
+24,dining_tools,0
+25,other_food,0
