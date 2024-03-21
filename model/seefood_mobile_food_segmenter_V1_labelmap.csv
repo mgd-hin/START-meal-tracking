@@ -21,7 +21,7 @@ id,name,serving_size_g,examples
 19,snacks,60
 20,sweets/desserts,100
 21,beverages,330
-22,fats/oils/sauces,1
+22,fats/oils/sauces,5
 23,food_containers,0
 24,dining_tools,0
 25,other_food,0
