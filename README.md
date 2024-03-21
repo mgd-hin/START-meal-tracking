@@ -2,6 +2,8 @@
 
 This Python script fetches data from the Open Food Facts API to retrieve information about food products. It extracts nutrient data from the API response, constructs JSON objects, and provides recommendations for healthy food choices based on the Nova group value.
 
+Try the full functionality, including semantic image segmentation on Colab: https://colab.research.google.com/drive/1SYeXR5fZlTN3oiQWckUQLAPIUAYDmMbR?usp=sharing
+
 ## Requirements
 
 - Python 3.x
