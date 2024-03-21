@@ -1,28 +1,32 @@
-import requests
 import openfoodfacts
 import json
+import pandas as pd
 
 # User-Agent is mandatory
 api = openfoodfacts.API(user_agent="Grocerly/Prototype")
 
-def fetch_data_from_api(query):
-    data = api.product.text_search(query).get("products")
-    allergens = data[0].get("allergens")
-    nutrients = data[0].get("nutriments")
-    print(data[0]) #TODO Get the type of the food on order to recommend a better food of the same type with better nova score
-    #print(nutrients)
-    #print(allergens)
-    #print(nutrients["nova-group"])
 
-    data = {
+def fetch_data_from_api(query):
+    query_data = api.product.text_search(query).get("products")
+
+    json_data = extract_nutrient_data(query_data)
+
+    if int(json_data["nutrients"]["nova-group"]) != 1:
+        recommend_healthy_suggestions(json_data, int(json_data["nutrients"]["nova-group"]), 3)
+
+
+def extract_nutrient_data(api_obj):
+    allergens = api_obj[0].get("allergens")
+    nutrients = api_obj[0].get("nutriments")
+
+    json_data = {
+        "name": api_obj[0].get("abbreviated_product_name"),
+        "categories": [],
         "nutrients": {
             "nova-group": nutrients["nova-group"],
             "nutrition-score-fr_100g": nutrients["nutrition-score-fr_100g"],
-            "proteins_100g":  nutrients["proteins_100g"],
-            "salt_100g": nutrients["salt_100g"],
-            "sugars_100g": nutrients["sugars_100g"],
-            "saturated-fat_100g":  nutrients["saturated-fat_100g"],
-            "ph_100g": nutrients["ph_100g"],
+            "proteins_100g": nutrients["proteins_100g"],
+            "saturated-fat_100g": nutrients["saturated-fat_100g"],
             "fat_100g": nutrients["fat_100g"],
             "energy_100g": nutrients["energy_100g"],
             "carbohydrates_100g": nutrients["carbohydrates_100g"]
@@ -30,14 +34,40 @@ def fetch_data_from_api(query):
         "allergens": allergens
     }
 
-    json_data = json.dumps(data)
+    for i in range(3):
+        if i < len(api_obj[0].get("categories_hierarchy")):
+            json_data["categories"].append(api_obj[0].get("categories_hierarchy")[i])
 
-    print(json_data)
+    optional_nutrients = ["salt_100g", "sugars_100g", "ph_100g"]
+    for nutrient in optional_nutrients:
+        if nutrient in nutrients:
+            json_data["nutrients"][nutrient] = nutrients[nutrient]
 
+    json_string = json.dumps(json_data)
+    print(json_string)
+
+    return json_data
+
+
+def recommend_healthy_suggestions(json_data, nova_score, num_suggestions):
+    #TODO
+    print("RECOMMENDATIONS:")
+
+    recommendations_json = {}
+
+    for category in json_data["categories"]:
+        category = category.strip("en:")
+        print(category)
+        query_data = api.product.text_search(category).get("products")
+        df = pd.DataFrame(query_data)
+        print(df.columns)
+        extract_nutrient_data(query_data)
+
+
+# Example usage
 fetch_data_from_api("water")
-
-
-
+print("################################")
+fetch_data_from_api("dairy")
 
 # Deprecated:
 """
